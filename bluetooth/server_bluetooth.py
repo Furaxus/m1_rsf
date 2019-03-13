@@ -1,16 +1,25 @@
 import bluetooth
 
-server_sock=bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 
-port = 3
-server_sock.bind(("",port))
-server_sock.listen(1)
+def main():
+    server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    port = 3
+    server_sock.bind(("",port))
 
-client_sock,address = server_sock.accept()
-print "Accepted connection from " + str(address)
+    server_sock.listen(1)
 
-data = client_sock.recv(1024)
-print "received [%s]" % data
+    while True:
+        print("Server listening...")
 
-client_sock.close()
-server_sock.close()
+        client_sock,address = server_sock.accept()
+        print("Accepted connection from " + str(address))
+
+        data = client_sock.recv(1024)
+        print("received [%s]" % data)
+
+        client_sock.close()
+    
+    server_sock.close()
+    
+if __name__ == "__main__":  
+    main()
