@@ -12,15 +12,19 @@ then
 	exit 0
 fi
 if [ $# -eq 5 ]
+then
 	chan = $4
 fi
 if [ $# -ge 4 ]
+then
 	port = $1
 fi
 if [ $# -ge 3 ]
+then
 	ssid = $1
 fi
 if [ $# -ge 2 ]
+then
 	address = $1
 fi
 

@@ -1,5 +1,10 @@
 #! /bin/sh
 
+
+############################
+######## DON'T WORK ########
+############################
+
 if [ $# -gt 3 || ($# -eq 3 && $1 != "client") ] then
     echo "Usage : $0 [ client <bluetooth_adress_to connect> | server | config ]"
     exit 1
