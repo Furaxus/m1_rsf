@@ -25,30 +25,28 @@ def main():
             
     config_file.close()
 
-    for i in range(5):
-        s.connect((host, port))
-        print("Communication number "+str(i))
-        with open(filename, 'wb') as f:
-            print ('file opened')
-            while True:
-                print('receiving data...')
-                data = s.recv(1024)
-                if data.decode()=='END':
-                    print('Receive END')
-                    break
-                # write data to a file
-                f.write(data)
-        f.close()
-        print('Successfully get the file')
-        commande=s.recv(1024).decode()
-        print('Receive command : '+ commande)
-        print('Execution...')
-        os.system('chmod u+x ' + filename)
-        if commande == "EXEC":
-            os.system('./' + filename)
-        print('End of execution')
-        s.close()
-        print('Connection closed')
+    s.connect((host, port))
+    with open(filename, 'wb') as f:
+        print ('file opened')
+        while True:
+            print('receiving data...')
+            data = s.recv(1024)
+            if data.decode()=='END':
+                print('Receive END')
+                break
+            # write data to a file
+            f.write(data)
+    f.close()
+    print('Successfully get the file')
+    commande=s.recv(1024).decode()
+    print('Receive command : '+ commande)
+    print('Execution...')
+    os.system('chmod u+x ' + filename)
+    if commande == "EXEC":
+        os.system('./' + filename)
+    print('End of execution')
+    s.close()
+    print('Connection closed')
 
 
 

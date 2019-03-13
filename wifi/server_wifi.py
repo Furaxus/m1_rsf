@@ -6,7 +6,6 @@ import time
 
 def main():
     s = socket.socket()             # Create a socket object
-    
     host = ""                       # Get local machine name
     port = -1                       # Port to listen
     filename = ""                   # Filename to execute
@@ -24,30 +23,29 @@ def main():
     config_file.close()
     
     s.bind((host, port))            # Bind to the port
-    s.listen(5)                     # Now wait for client connection.
+    s.listen(port)                     # Now wait for client connection.
 
 
-    while True:
-        print ('Server listening....')
-        conn, addr = s.accept()     # Establish connection with client.
-        print ('Got connection from ' + str(addr))
-        #data = conn.recv(1024)
-        #print('Server received'+ repr(data))
+    print ('Server listening....')
+    conn, addr = s.accept()     # Establish connection with client.
+    print ('Got connection from ' + str(addr))
+    #data = conn.recv(1024)
+    #print('Server received'+ repr(data))
 
-        f = open(filename,'rb')
+    f = open(filename,'rb')
+    l = f.read(1024)
+    print(l)
+    while (l):
+        conn.send(l)
+        print('Sent ',repr(l))
         l = f.read(1024)
-        print(l)
-        while (l):
-            conn.send(l)
-            print('Sent ',repr(l))
-            l = f.read(1024)
-        f.close()
+    f.close()
 
-        print('Done sending')
-        time.sleep(3)
-        conn.send('END'.encode())
-        conn.send('EXEC'.encode())
-        conn.close()
+    print('Done sending')
+    time.sleep(3)
+    conn.send('END'.encode())
+    conn.send('EXEC'.encode())
+    conn.close()
         
     
 
