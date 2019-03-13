@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# A large part of this code provide from https://gist.github.com/giefko/2fa22e01ff98e72a5be2
 
 import sys                      # Import sys module
 import socket                   # Import socket module
@@ -29,10 +26,9 @@ def main():
     s.bind((host, port))            # Bind to the port
     s.listen(5)                     # Now wait for client connection.
 
-    print ('Server listening....')
-
 
     while True:
+        print ('Server listening....')
         conn, addr = s.accept()     # Establish connection with client.
         print ('Got connection from ' + str(addr))
         #data = conn.recv(1024)

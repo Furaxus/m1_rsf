@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import socket                   # Import socket module
 import time
 import subprocess
