@@ -3,21 +3,20 @@ import bluetooth
 
 def main():
     server_sock=bluetooth.BluetoothSocket(bluetooth.RFCOMM)
-    port = 3
+    port = 1
     server_sock.bind(("",port))
 
-    server_sock.listen(1)
+    server_sock.listen(port)
 
-    while True:
-        print("Server listening...")
+    print("Server listening...")
 
-        client_sock,address = server_sock.accept()
-        print("Accepted connection from " + str(address))
+    client_sock,address = server_sock.accept()
+    print("Accepted connection from " + str(address))
 
-        data = client_sock.recv(1024)
-        print("received [%s]" % data)
+    data = client_sock.recv(1024)
+    print("received [%s]" % data)
 
-        client_sock.close()
+    client_sock.close()
     
     server_sock.close()
     
