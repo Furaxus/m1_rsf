@@ -11,7 +11,9 @@ def read_config():
     global wifi_port
     global filename
 
+    #open config file
     config_file = open("wifi_config.conf")
+    #get configuration from config file
     for line in config_file:
         param = line.split(' ')
         if param[0] == "IP":
@@ -74,5 +76,5 @@ def main():
     # END OF BLUETOOTH PART
 
 
-if __name__ == "__main__":  
+if __name__ == "__main__":
     main()
