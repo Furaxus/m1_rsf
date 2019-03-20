@@ -10,6 +10,7 @@ def main():
     port = -1                       # Port to listen
     filename = ""                   # Filename to execute
     
+    # Get configuration from config file
     config_file = open("config.conf")
     for line in config_file:
         param = line.split(' ')
@@ -19,33 +20,31 @@ def main():
             port = int(param[1])
         elif param[0] == "FILENAME_CLT":
             filename = param[1]
-            
     config_file.close()
     
+
     s.bind((host, port))            # Bind to the port
-    s.listen(port)                     # Now wait for client connection.
+    s.listen(port)                  # Now wait for client connection.
 
 
     print ('Server listening....')
-    conn, addr = s.accept()     # Establish connection with client.
+    conn, addr = s.accept()         # Establish connection with client.
     print ('Got connection from ' + str(addr))
-    #data = conn.recv(1024)
-    #print('Server received'+ repr(data))
 
-    f = open(filename,'rb')
+    f = open(filename,'rb')         # Open exec file
+    # Read data and send data
     l = f.read(1024)
-    print(l)
     while (l):
         conn.send(l)
-        print('Sent ',repr(l))
+        #print('Sent ',repr(l))
         l = f.read(1024)
-    f.close()
+    f.close()                       # Close file
 
     print('Done sending')
-    time.sleep(3)
+    time.sleep(3)                   # Waiting time for synchro
     conn.send('END'.encode())
-    conn.send('EXEC'.encode())
-    conn.close()
+    conn.send('EXEC'.encode())      # Sending execution order
+    conn.close()                    # Closing connection
         
     
 
