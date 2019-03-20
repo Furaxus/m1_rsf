@@ -4,7 +4,7 @@ address="192.168.1.69"
 wlan="RPISIAME"
 chan=4
 port=5000
-file_name="src_exec.sh"
+file_name="exec.sh"
 
 if [ $# -gt 5 ]
 then

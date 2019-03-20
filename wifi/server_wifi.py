@@ -18,8 +18,9 @@ def main():
             host = param[1]
         elif param[0] == "PORT":
             port = int(param[1])
-        elif param[0] == "FILENAME_CLT":
-            filename = param[1]
+        elif param[0] == "FILENAME_SRV":
+            l = param[1].split('\n')
+            filename = l[0]
     config_file.close()
     
 
